@@ -5,7 +5,7 @@
 # Control Tower Core Account Parameters
 #########################################
 variable "ct_management_account_id" {
-  description = "Control Tower Management Account Id"
+  ct_management_account_id = "062685782418"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.ct_management_account_id))
@@ -13,7 +13,7 @@ variable "ct_management_account_id" {
   }
 }
 variable "log_archive_account_id" {
-  description = "Log Archive Account Id"
+  audit_account_id = "352711483637"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.log_archive_account_id))
@@ -21,7 +21,7 @@ variable "log_archive_account_id" {
   }
 }
 variable "audit_account_id" {
-  description = "Audit Account Id"
+  description = "982973907745"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.audit_account_id))
@@ -50,7 +50,16 @@ variable "aft_framework_repo_git_ref" {
 }
 
 variable "aft_management_account_id" {
-  description = "AFT Management Account ID"
+  aft_management_account_id = "687157448464"
+  type        = string
+  validation {
+    condition     = can(regex("^\\d{12}$", var.aft_management_account_id))
+    error_message = "Variable var: aft_management_account_id is not valid."
+  }
+}
+
+variable "github_username" {
+ github_username = "digitalcrest01"
   type        = string
   validation {
     condition     = can(regex("^\\d{12}$", var.aft_management_account_id))
@@ -59,13 +68,26 @@ variable "aft_management_account_id" {
 }
 
 variable "ct_home_region" {
-  description = "The region from which this module will be executed. This MUST be the same region as Control Tower is deployed."
+  ct_home_region = "us-east-1"
   type        = string
   validation {
     condition     = can(regex("(us(-gov)?|ap|ca|cn|eu|sa)-(central|(north|south)?(east|west)?)-\\d", var.ct_home_region))
     error_message = "Variable var: region is not valid."
   }
 }
+
+variable "tf_backend_secondary_region" {
+ tf_backend_secondary_region = "us-east-2"
+  type        = string
+  validation {
+    condition     = can(regex("(us(-gov)?|ap|ca|cn|eu|sa)-(central|(north|south)?(east|west)?)-\\d", var.ct_backend_secondary_region))
+    error_message = "Variable var: region is not valid."
+  }
+}
+
+
+
+
 
 variable "cloudwatch_log_group_retention" {
   description = "Amount of days to keep CloudWatch Log Groups for Lambda functions. 0 = Never Expire"
